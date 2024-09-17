@@ -7,10 +7,10 @@ terraform {
     }
   }
   
-  backend "s3" {
-    bucket         = "your-terraform-state-bucket"
-    key            = "path/to/your/terraform.tfstate"
-    region         = var.aws_region
-    dynamodb_table = "your-terraform-lock-table"
-  }
+  # backend "s3" {
+  #   bucket         = "your-terraform-state-bucket"
+  #   key            = "path/to/your/terraform.tfstate"
+  #   region         = var.aws_region
+  #   dynamodb_table = "your-terraform-lock-table"
+  # }
 }
