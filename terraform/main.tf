@@ -1,6 +1,6 @@
 # Création du bucket S3
 resource "aws_s3_bucket" "website_bucket" {
-  bucket = "lecloudfacile-myname-06"  # Remplacez par un nom unique
+  bucket = "lecloudfacile-myname-07"  # Remplacez par un nom unique
 }
 
 # Politique du bucket pour permettre l'accès public en lecture
@@ -50,16 +50,13 @@ resource "aws_s3_bucket_acl" "website" {
   acl    = "public-read-write"
 }
 
-data "aws_canonical_user_id" "name" {
-  
-}
 resource "aws_s3_bucket_public_access_block" "website" {
   bucket = aws_s3_bucket.website_bucket.id
 
-  block_public_acls       = false
+  block_public_acls       = true
   block_public_policy     = false
-  ignore_public_acls      = false
-  restrict_public_buckets = false
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 # Output pour afficher l'URL du site web
