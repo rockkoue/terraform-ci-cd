@@ -15,8 +15,16 @@ resource "aws_s3_bucket_website_configuration" "website" {
   }
 }
 
+resource "aws_s3_bucket_ownership_controls" "website" {
+  bucket = aws_s3_bucket.website_bucket.id
+
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
 resource "aws_s3_bucket_acl" "website" {
-  
+  depends_on = [aws_s3_bucket_ownership_controls.website]
+
   bucket = aws_s3_bucket.website_bucket.id
   acl    = "public-read"
 }
