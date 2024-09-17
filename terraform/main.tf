@@ -1,6 +1,6 @@
 # Création du bucket S3
 resource "aws_s3_bucket" "website_bucket" {
-  bucket = "lecloudfacile-myname-08"  # Remplacez par un nom unique
+  bucket = "lecloudfacile-myname-09"  # Remplacez par un nom unique
 }
 
 # Politique du bucket pour permettre l'accès public en lecture
@@ -15,8 +15,8 @@ resource "aws_s3_bucket_policy" "website_bucket_policy" {
         Effect    = "Allow"
         Principal = "*"
         Action    = "s3:*"
-        Resource  = "${aws_s3_bucket.website_bucket.arn}/*"
-      },
+        Resource  = ["${aws_s3_bucket.website_bucket.arn}/*","${aws_s3_bucket.website_bucket.arn}"]
+      }
     ]
   })
 }
