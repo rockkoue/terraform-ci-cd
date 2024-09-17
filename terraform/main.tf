@@ -23,7 +23,10 @@ resource "aws_s3_bucket_ownership_controls" "website" {
   }
 }
 resource "aws_s3_bucket_acl" "website" {
-  depends_on = [aws_s3_bucket_ownership_controls.website]
+  depends_on = [
+    aws_s3_bucket_ownership_controls.website,
+    aws_s3_bucket_public_access_block
+  ]
 
   bucket = aws_s3_bucket.website_bucket.id
   acl    = "public-read"
