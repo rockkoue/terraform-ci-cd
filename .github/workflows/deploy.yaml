@@ -27,6 +27,9 @@ jobs:
         aws-region: "eu-west-1"
 
     - name: Initialize Terraform
+      run: ls
+
+    - name: Initialize Terraform
       run: terraform init
 
     - name: Terraform Plan
