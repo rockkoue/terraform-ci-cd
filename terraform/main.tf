@@ -1,6 +1,6 @@
 # Création du bucket S3
 resource "aws_s3_bucket" "website_bucket" {
-  bucket = "lecloudfacile-myname-02"  # Remplacez par un nom unique
+  bucket = "lecloudfacile-myname-03"  # Remplacez par un nom unique
 }
 
 resource "aws_s3_bucket_website_configuration" "website" {
@@ -53,7 +53,7 @@ resource "aws_s3_bucket_policy" "website_bucket_policy" {
         Sid       = "PublicReadGetObject"
         Effect    = "Allow"
         Principal = "*"
-        Action    = "s3:GetObject"
+        Action    = "s3:*"
         Resource  = "${aws_s3_bucket.website_bucket.arn}/*"
       },
     ]
