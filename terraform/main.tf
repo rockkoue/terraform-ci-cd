@@ -1,6 +1,6 @@
 # Création du bucket S3
 resource "aws_s3_bucket" "website_bucket" {
-  bucket = "lecloudfacile-myname-04"  # Remplacez par un nom unique
+  bucket = "lecloudfacile-myname-05"  # Remplacez par un nom unique
 }
 
 resource "aws_s3_bucket_website_configuration" "website" {
@@ -29,7 +29,7 @@ resource "aws_s3_bucket_acl" "website" {
   ]
 
   bucket = aws_s3_bucket.website_bucket.id
-  acl    = "public-read"
+  acl    = "public-read-write"
 }
 
 
