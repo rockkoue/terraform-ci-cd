@@ -4,10 +4,9 @@ on:
   push:
     branches:
       - main
-
 jobs:
   deploy:
-    name: Deploy
+    name: Test
     runs-on: ubuntu-latest
 
     steps:
