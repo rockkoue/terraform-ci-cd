@@ -1,12 +1,13 @@
-name: Deploy Web app
+name: Deploy with S3
 
 on:
   push:
     branches:
       - main
+
 jobs:
-  deploy:
-    name: Test
+  terraform:
+    name: Deploy
     runs-on: ubuntu-latest
 
     steps:
