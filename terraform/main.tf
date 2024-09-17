@@ -3,6 +3,24 @@ resource "aws_s3_bucket" "website_bucket" {
   bucket = "lecloudfacile-myname-05"  # Remplacez par un nom unique
 }
 
+# Politique du bucket pour permettre l'accès public en lecture
+resource "aws_s3_bucket_policy" "website_bucket_policy" {
+  bucket = aws_s3_bucket.website_bucket.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid       = "PublicReadGetObject"
+        Effect    = "Allow"
+        Principal = "*"
+        Action    = "s3:*"
+        Resource  = "${aws_s3_bucket.website_bucket.arn}/*"
+      },
+    ]
+  })
+}
+
 resource "aws_s3_bucket_website_configuration" "website" {
   bucket = aws_s3_bucket.website_bucket.id
 
@@ -32,7 +50,9 @@ resource "aws_s3_bucket_acl" "website" {
   acl    = "public-read-write"
 }
 
-
+data "aws_canonical_user_id" "name" {
+  
+}
 resource "aws_s3_bucket_public_access_block" "website" {
   bucket = aws_s3_bucket.website_bucket.id
 
@@ -40,24 +60,6 @@ resource "aws_s3_bucket_public_access_block" "website" {
   block_public_policy     = false
   ignore_public_acls      = false
   restrict_public_buckets = false
-}
-
-# Politique du bucket pour permettre l'accès public en lecture
-resource "aws_s3_bucket_policy" "website_bucket_policy" {
-  bucket = aws_s3_bucket.website_bucket.id
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Sid       = "PublicReadGetObject"
-        Effect    = "Allow"
-        Principal = "*"
-        Action    = "s3:*"
-        Resource  = "${aws_s3_bucket.website_bucket.arn}/*"
-      },
-    ]
-  })
 }
 
 # Output pour afficher l'URL du site web
