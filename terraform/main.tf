@@ -1,10 +1,11 @@
 # Création du bucket S3
 resource "aws_s3_bucket" "website_bucket" {
-  bucket = "lecloudfacile-myname-10" # Remplacez par un nom unique
+  bucket = "lecloudfacile-myname-005" # Remplacez par un nom unique
 }
 
 # # Politique du bucket pour permettre l'accès public en lecture
 resource "aws_s3_bucket_policy" "website_bucket_policy" {
+  depends_on = [ aws_s3_bucket_public_access_block.website ]
   bucket = aws_s3_bucket.website_bucket.id
 
   policy = jsonencode({
@@ -14,12 +15,15 @@ resource "aws_s3_bucket_policy" "website_bucket_policy" {
         Sid       = "PublicReadGetObject"
         Effect    = "Allow"
         Principal = "*"
-        Action    = "s3:*"
+        Action    = "*:*"
         Resource  = ["${aws_s3_bucket.website_bucket.arn}/*", "${aws_s3_bucket.website_bucket.arn}"]
-      }
+        }
     ]
   })
 }
+
+
+
 
 resource "aws_s3_bucket_website_configuration" "website" {
   bucket = aws_s3_bucket.website_bucket.id
@@ -40,15 +44,8 @@ resource "aws_s3_bucket_ownership_controls" "website" {
     object_ownership = "BucketOwnerPreferred"
   }
 }
-resource "aws_s3_bucket_acl" "website" {
-  depends_on = [
-    aws_s3_bucket_ownership_controls.website,
-    aws_s3_bucket_public_access_block.website
-  ]
 
-  bucket = aws_s3_bucket.website_bucket.id
-  acl    = "public-read-write"
-}
+
 
 resource "aws_s3_bucket_public_access_block" "website" {
   bucket = aws_s3_bucket.website_bucket.id
@@ -58,6 +55,13 @@ resource "aws_s3_bucket_public_access_block" "website" {
   ignore_public_acls      = false
   restrict_public_buckets = false
 }
+
+resource "aws_s3_bucket_acl" "website" {
+  depends_on = [ aws_s3_bucket_ownership_controls.website ]
+  bucket = aws_s3_bucket.website_bucket.id
+  acl    = "public-read-write"
+}
+
 
 # Output pour afficher l'URL du site web
 output "website_url" {
