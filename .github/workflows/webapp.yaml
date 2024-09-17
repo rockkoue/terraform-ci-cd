@@ -24,4 +24,3 @@ jobs:
       run: |
         aws s3 sync webapp/index.html s3://lecloudfacile-myname-005/ --delete
         aws s3 cp index.html s3://lecloudfacile-myname-005/
-        aws s3 cp index.html s3://lecloudfacile-myname-005/index.html --cache-control "no-cache,no-store,must-revalidate"
