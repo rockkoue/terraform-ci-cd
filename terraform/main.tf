@@ -1,9 +1,9 @@
 # Création du bucket S3
 resource "aws_s3_bucket" "website_bucket" {
-  bucket = "lecloudfacile-myname-09"  # Remplacez par un nom unique
+  bucket = "lecloudfacile-myname-10" # Remplacez par un nom unique
 }
 
-# Politique du bucket pour permettre l'accès public en lecture
+# # Politique du bucket pour permettre l'accès public en lecture
 resource "aws_s3_bucket_policy" "website_bucket_policy" {
   bucket = aws_s3_bucket.website_bucket.id
 
@@ -15,7 +15,7 @@ resource "aws_s3_bucket_policy" "website_bucket_policy" {
         Effect    = "Allow"
         Principal = "*"
         Action    = "s3:*"
-        Resource  = ["${aws_s3_bucket.website_bucket.arn}/*","${aws_s3_bucket.website_bucket.arn}"]
+        Resource  = ["${aws_s3_bucket.website_bucket.arn}/*", "${aws_s3_bucket.website_bucket.arn}"]
       }
     ]
   })
@@ -53,10 +53,10 @@ resource "aws_s3_bucket_acl" "website" {
 resource "aws_s3_bucket_public_access_block" "website" {
   bucket = aws_s3_bucket.website_bucket.id
 
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
 }
 
 # Output pour afficher l'URL du site web
