@@ -3,10 +3,10 @@ name: Deploy with Terraform
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
-  deploy:
+  terraform:
     name: Deploy
     runs-on: ubuntu-latest
 
