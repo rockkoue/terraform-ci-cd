@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  terraform:
+  deploy:
     name: Deploy
     runs-on: ubuntu-latest
 
