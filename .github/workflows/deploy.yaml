@@ -1,9 +1,9 @@
-name: Deploy with Terraform
+name: Deploy Pipeline For Terraform
 
 on:
-  push:
+  pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   terraform:
@@ -37,10 +37,7 @@ jobs:
         cd terraform
         terraform plan -out=tfplan
     - name: Terraform Apply
-      if: github.ref == 'refs/heads/main' && success()
+      if: github.event.pull_request.merged == true
       run: |
         cd terraform
         terraform apply -auto-approve
-   # - name: Terraform Apply
-   #  if: github.ref == 'refs/heads/main' && success()
-   #   run: terraform apply -auto-approve tfplan
