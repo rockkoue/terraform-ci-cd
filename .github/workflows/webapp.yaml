@@ -1,9 +1,12 @@
-name: Deploy webApp
+name: Deploy Pipeline For webApp
 
 on:
   push:
     branches:
       - main
+    paths:
+      - 'webapp/**'
+      - '.github/workflows/webapp.yml'
 
 jobs:
   terraform:
