@@ -3,6 +3,8 @@ name: Deploy Pipeline For Terraform
 on:
   pull_request:
     types: [closed]
+  paths: 
+    - 'terraform/**'
   
 jobs:
   terraform:
