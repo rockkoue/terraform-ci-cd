@@ -2,10 +2,10 @@ name: Deploy Pipeline For Terraform
 
 on:
   push:
-  branches:
-    - main
-  paths: 
-    - 'terraform/**'
+    branches:
+      - main
+    paths: 
+      - 'terraform/**'
   
 jobs:
   terraform:
