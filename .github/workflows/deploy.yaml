@@ -1,8 +1,9 @@
 name: Deploy Pipeline For Terraform
 
 on:
-  pull_request:
-    types: [closed]
+  push:
+  branches:
+    - main
   paths: 
     - 'terraform/**'
   
@@ -38,7 +39,7 @@ jobs:
         cd terraform
         terraform plan -out=tfplan
     - name: Terraform Apply
-      if: github.event.pull_request.merged == true
+      #if: github.event.pull_request.merged == true
       run: |
         cd terraform
         terraform apply -auto-approve
