@@ -26,10 +26,4 @@ jobs:
     - name: Deploy to AWS S3
       run: |
         echo "Uploading files to S3..."
-        aws s3 cp webapp/ s3://lecloudfacile-rockkoue25-225/ --recursive --region eu-west-1
-      continue-on-error: true 
-
-    - name: Verify upload
-      run: |
-        echo "Verifying the upload..."
-        aws s3 ls s3://lecloudfacile-rockkoue25-225/ --recursive --region eu-west-1
+        aws s3 cp webapp/ s3://lecloudfacile-rockkoue-225/  --region eu-west-1
