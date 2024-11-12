@@ -3,9 +3,6 @@ name: Deploy Pipeline For Terraform application
 on:
   pull_request:
     types: [closed]  
-    
-    branches:
-      - main 
     paths: 
       - 'terraform/**'
   

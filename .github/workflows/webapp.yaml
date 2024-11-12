@@ -36,4 +36,4 @@ jobs:
     - name: Deploy to AWS S3
       run: |
         echo "Uploading files to S3..."
-        aws s3 cp webapp/ s3://lecloudfacile-rockkouexs-225/  --region eu-west-1
+        aws s3 cp webapp/ s3://lecloudfacile-rockkoueweb225/  --region eu-west-1
